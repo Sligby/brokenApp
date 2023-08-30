@@ -27,6 +27,7 @@ app.post('/', async (req, res, next)=>{
     const devs = developers
     const data = [];
     // loop over each dev and push data into array
+    if (!devs) throw new ExpressError('No devs provided', 404)
     for (const dev of devs) {
       const res = await axios.get(`https://api.github.com/users/${dev}`)
       data.push({
